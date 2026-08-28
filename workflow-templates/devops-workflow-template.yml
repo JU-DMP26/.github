@@ -1,0 +1,41 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Calculator Workflow
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the $default-branch branch
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test-and-deliver:
+    # If the job takes longer than 10 minutes, it will be cancelled - keep this!
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+    # The workflow/pipeline runs a Linux Ubuntu server
+    runs-on: ubuntu-latest
+    # A job contains a number of steps to do
+    steps:
+      # Checks out the code from the repository
+      - name: Checkout latest code
+        uses: actions/checkout@v7
+
+      # Example: Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Example: Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
